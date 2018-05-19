@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+	<button onclick="stopVideo()" value = "Stop video!">
+
+    <script>
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '360',
+          width: '640',
+          videoId: 'ccuW6em6chQ',
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+      }
+
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+		console.log('Playing again');
+		console.log(player.b.b.videoId);
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      var done = false;
+      function onPlayerStateChange(event) {
+			if(event.data === 0 && player.b.b.videoId != '885D1Po_P2w') {
+			    //player.videoId = '885D1Po_P2w';			
+                //alert('done');
+				// play the next video
+				//loadVideoById('885D1Po_P2w', 5, 'large');
+				player.b.b.videoId = '885D1Po_P2w';
+				
+				player.loadVideoById({'videoId': '885D1Po_P2w',
+               'startSeconds': 0,
+               'endSeconds': 28,
+               'suggestedQuality': 'large'});
+			   
+				
+            }
+			if(event.data === 0 && player.b.b.videoId === '885D1Po_P2w') {
+				console.log('Ready the second one');
+				console.log(player.b.b.videoId);
+			    //alert('Go to slepp');
+            }
+        }
+      	  
+      function stopVideo() {
+        player.stopVideo();
+      }
+
+    </script>
+  </body>
+</html>
